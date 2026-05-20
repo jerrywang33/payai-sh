@@ -5,6 +5,11 @@ PayAI packages are intended to publish under the `@payai-sh` npm scope:
 - `@payai-sh/core`
 - `@payai-sh/x402`
 
+Current public release:
+
+- `@payai-sh/core@0.0.1`
+- `@payai-sh/x402@0.0.1`
+
 ## Prerequisite
 
 The npm account used for publishing must own or belong to the `payai-sh` npm organization/scope.
