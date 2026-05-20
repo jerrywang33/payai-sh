@@ -10,7 +10,8 @@
   "scripts": {
     "check": "tsc -b packages/core packages/x402 && node --test packages/*/test/*.test.mjs",
     "demo": "node examples/research-agent/demo.mjs",
-    "dev": "python3 -m http.server 5173"
+    "dev": "python3 -m http.server 5173",
+    "publish:dry-run": "npm publish --workspace @payai-sh/core --dry-run --access public && npm publish --workspace @payai-sh/x402 --dry-run --access public"
   },
   "keywords": [
     "x402",

@@ -85,3 +85,45 @@ test("throws when policy denies the x402 quote", async () => {
     /merchant_not_allowed/,
   );
 });
+
+test("retries a POST request without losing the body", async () => {
+  const bodies = [];
+  const payaiFetch = createPayAIFetch({
+    grant: {
+      id: "grant_post",
+      agentId: "agent_test",
+      totalBudget: { amount: "1", currency: "USDC" },
+      allowedMerchants: ["data.example.com"],
+    },
+    fetch: async (request) => {
+      bodies.push(await request.text());
+      if (!request.headers.has("X-Payment")) {
+        return Response.json(
+          {
+            amount: "0.10",
+            currency: "USDC",
+            merchant: "data.example.com",
+          },
+          { status: 402 },
+        );
+      }
+
+      return Response.json({ ok: true });
+    },
+    payer: async (request) => {
+      request.paymentHeaders.set("X-Payment", "mock-payment");
+      return request.fetch(request.paymentHeaders);
+    },
+  });
+
+  const response = await payaiFetch("https://data.example.com/report", {
+    method: "POST",
+    body: JSON.stringify({ query: "agent payments" }),
+  });
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(bodies, [
+    JSON.stringify({ query: "agent payments" }),
+    JSON.stringify({ query: "agent payments" }),
+  ]);
+});

@@ -39,6 +39,7 @@ export function createPayAIFetch(options: CreatePayAIFetchOptions) {
 
   return async function payaiFetch(input: string | URL | Request, init: PayAIFetchOptions = {}): Promise<Response> {
     const request = toRequest(input, init);
+    const retryRequest = request.clone();
     const firstResponse = await baseFetch(request);
 
     if (firstResponse.status !== 402) {
@@ -62,9 +63,9 @@ export function createPayAIFetch(options: CreatePayAIFetchOptions) {
       quote,
       paymentHeaders,
       fetch: async (headers) => {
-        const retryHeaders = new Headers(request.headers);
+        const retryHeaders = new Headers(retryRequest.headers);
         headers.forEach((value, key) => retryHeaders.set(key, value));
-        return baseFetch(new Request(request, { headers: retryHeaders }));
+        return baseFetch(new Request(retryRequest, { headers: retryHeaders }));
       },
     });
 

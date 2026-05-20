@@ -76,7 +76,7 @@ export class MemorySpendingLedger implements SpendingLedger {
 }
 
 export function evaluatePayment(grant: SpendingGrant, quote: PaymentQuote, ledger: SpendingLedger): PaymentDecision {
-  const spent = ledger.getSpent(grant.id) ?? { amount: "0", currency: quote.amount.currency };
+  const spent = ledger.getSpent(grant.id) ?? { amount: "0", currency: grant.totalBudget.currency };
   const remaining = subtractMoney(grant.totalBudget, spent);
 
   if (grant.totalBudget.currency !== quote.amount.currency) {
@@ -176,6 +176,10 @@ function assertSameCurrency(left: Money, right: Money): void {
 }
 
 function toMinorUnits(money: Money): bigint {
+  if (!/^\d+(\.\d{1,6})?$/.test(money.amount)) {
+    throw new Error(`Invalid money amount: ${money.amount}`);
+  }
+
   const [whole = "0", fraction = ""] = money.amount.split(".");
   const paddedFraction = `${fraction}000000`.slice(0, 6);
   return BigInt(whole) * 1_000_000n + BigInt(paddedFraction);

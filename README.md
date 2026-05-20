@@ -76,3 +76,9 @@ PayAI is not:
 - a wallet
 - a facilitator
 - a new payment rail
+
+## Docs
+
+- [Getting started](docs/getting-started.md)
+- [Protocol notes](docs/protocol.md)
+- [Publishing](docs/publishing.md)

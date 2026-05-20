@@ -3,6 +3,15 @@
   "version": "0.0.1",
   "description": "x402 fetch wrapper with PayAI policy enforcement.",
   "type": "module",
+  "homepage": "https://payai.sh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerrywang33/payai-sh.git",
+    "directory": "packages/x402"
+  },
+  "bugs": {
+    "url": "https://github.com/jerrywang33/payai-sh/issues"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -16,7 +25,10 @@
     "check": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@payai-sh/core": "file:../core"
+    "@payai-sh/core": "^0.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "license": "MIT"
 }

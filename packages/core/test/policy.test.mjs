@@ -64,6 +64,22 @@ test("denies a merchant outside the allowlist", () => {
   assert.equal(decision.reason, "merchant_not_allowed");
 });
 
+test("denies currency mismatch without throwing", () => {
+  const ledger = new MemorySpendingLedger();
+  const decision = evaluatePayment(
+    grant,
+    {
+      merchant: "data.example.com",
+      amount: { amount: "0.10", currency: "USDT" },
+      purpose: "research",
+    },
+    ledger,
+  );
+
+  assert.equal(decision.allowed, false);
+  assert.equal(decision.reason, "currency_mismatch");
+});
+
 test("tracks spent budget through receipts", () => {
   const ledger = new MemorySpendingLedger();
   ledger.record(
