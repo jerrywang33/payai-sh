@@ -66,8 +66,13 @@ a {
 }
 
 .topnav a:hover,
-.sidebar a:hover {
+.sidebar a:hover,
+.sidebar a[aria-current="page"] {
   color: var(--text);
+}
+
+.sidebar a[aria-current="page"] {
+  font-weight: 700;
 }
 
 .shell {

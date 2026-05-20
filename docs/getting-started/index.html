@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Getting Started | PayAI Docs</title>
+    <meta name="description" content="Set up PayAI locally and run the x402 demo.">
+    <link rel="stylesheet" href="/docs/assets/docs.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/docs/">
+        <span class="brand-mark">⚡</span>
+        <span>PayAI docs</span>
+      </a>
+      <nav class="topnav" aria-label="Main navigation">
+        <a href="/docs/">Docs</a>
+        <a href="https://payai.sh">Website</a>
+        <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Documentation navigation">
+        <div class="nav-section">
+          <p>Start</p>
+          <a href="/docs/">Overview</a>
+          <a href="/docs/getting-started/" aria-current="page">Getting Started</a>
+          <a href="/docs/protocol/">Protocol Notes</a>
+          <a href="/docs/publishing/">Publishing</a>
+        </div>
+        <div class="nav-section">
+          <p>Project</p>
+          <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/core">npm core</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/x402">npm x402</a>
+        </div>
+      </aside>
+      <main class="content">
+        <h1>Getting Started</h1>
+        <p>Install dependencies:</p>
+        <pre><code>npm install</code></pre>
+
+        <p>Run checks:</p>
+        <pre><code>npm run check</code></pre>
+
+        <p>Run the demo:</p>
+        <pre><code>npm run demo</code></pre>
+
+        <p>The demo simulates:</p>
+        <ol>
+          <li>An agent requests a paid API.</li>
+          <li>The API returns <code>402 Payment Required</code>.</li>
+          <li>PayAI parses the quote and checks the grant.</li>
+          <li>A mock x402 payer adds payment headers.</li>
+          <li>The API returns the paid resource.</li>
+          <li>PayAI records a receipt.</li>
+        </ol>
+
+        <h2>Packages</h2>
+        <h3><code>@payai-sh/core</code></h3>
+        <p>Core policy primitives:</p>
+        <ul>
+          <li><code>SpendingGrant</code></li>
+          <li><code>PaymentQuote</code></li>
+          <li><code>PaymentDecision</code></li>
+          <li><code>PaymentReceipt</code></li>
+          <li><code>MemorySpendingLedger</code></li>
+          <li><code>evaluatePayment</code></li>
+          <li><code>createReceipt</code></li>
+        </ul>
+
+        <h3><code>@payai-sh/x402</code></h3>
+        <p>Fetch wrapper for x402-like paid resources:</p>
+        <ul>
+          <li>detects <code>402</code> responses</li>
+          <li>parses payment requirements from JSON response body or payment headers</li>
+          <li>runs PayAI policy before payment</li>
+          <li>calls a provided payer adapter</li>
+          <li>records receipts after successful retry</li>
+        </ul>
+
+        <h2>Minimal Example</h2>
+        <pre><code>import { createPayAIFetch } from "@payai-sh/x402";
+
+const payaiFetch = createPayAIFetch({
+  grant,
+  payer: async (request) => {
+    request.paymentHeaders.set("X-Payment", "mock-payment");
+    return request.fetch(request.paymentHeaders);
+  }
+});
+
+const response = await payaiFetch("https://data.example.com/report", {
+  purpose: "research"
+});</code></pre>
+      </main>
+    </div>
+  </body>
+</html>

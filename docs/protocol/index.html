@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Protocol Notes | PayAI Docs</title>
+    <meta name="description" content="PayAI protocol notes and relationship to x402.">
+    <link rel="stylesheet" href="/docs/assets/docs.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/docs/">
+        <span class="brand-mark">⚡</span>
+        <span>PayAI docs</span>
+      </a>
+      <nav class="topnav" aria-label="Main navigation">
+        <a href="/docs/">Docs</a>
+        <a href="https://payai.sh">Website</a>
+        <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Documentation navigation">
+        <div class="nav-section">
+          <p>Start</p>
+          <a href="/docs/">Overview</a>
+          <a href="/docs/getting-started/">Getting Started</a>
+          <a href="/docs/protocol/" aria-current="page">Protocol Notes</a>
+          <a href="/docs/publishing/">Publishing</a>
+        </div>
+        <div class="nav-section">
+          <p>Project</p>
+          <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/core">npm core</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/x402">npm x402</a>
+        </div>
+      </aside>
+      <main class="content">
+        <h1>PayAI Protocol Notes</h1>
+        <p>PayAI is a policy and receipt layer for autonomous agent payments.</p>
+        <p>It is designed to sit around x402:</p>
+        <pre><code>Agent -> PayAI policy check -> x402 payment -> PayAI receipt</code></pre>
+
+        <h2>x402 Relationship</h2>
+        <p>x402 is the payment execution layer. It defines how a paid HTTP resource asks for payment, how a client presents payment, and how that payment is verified.</p>
+        <p>PayAI does not replace x402. PayAI adds:</p>
+        <ul>
+          <li>grants: what an agent is allowed to spend</li>
+          <li>policy checks: whether a specific x402 quote is allowed</li>
+          <li>approvals: future human-in-the-loop escalation</li>
+          <li>receipts: structured records tying payment to task, merchant, resource, and transaction</li>
+        </ul>
+
+        <h2>Core Objects</h2>
+        <h3>Grant</h3>
+        <p>A spending grant is issued by a human or organization to an agent.</p>
+        <pre><code>{
+  "id": "grant_research",
+  "agentId": "research-agent",
+  "totalBudget": { "amount": "10", "currency": "USDC" },
+  "perPaymentLimit": { "amount": "0.25", "currency": "USDC" },
+  "allowedMerchants": ["data.example.com"],
+  "allowedPurposes": ["research"],
+  "expiresAt": "2099-01-01T00:00:00.000Z"
+}</code></pre>
+
+        <h3>Quote</h3>
+        <p>A quote represents a paid resource request.</p>
+        <pre><code>{
+  "merchant": "data.example.com",
+  "amount": { "amount": "0.05", "currency": "USDC" },
+  "purpose": "research",
+  "resource": "/report",
+  "rail": "x402",
+  "network": "base"
+}</code></pre>
+
+        <h3>Decision</h3>
+        <p>A decision is produced before payment.</p>
+        <pre><code>{
+  "allowed": true,
+  "reason": "allowed",
+  "grantId": "grant_research"
+}</code></pre>
+
+        <p>Denied reasons currently include:</p>
+        <ul>
+          <li><code>currency_mismatch</code></li>
+          <li><code>grant_expired</code></li>
+          <li><code>quote_expired</code></li>
+          <li><code>merchant_not_allowed</code></li>
+          <li><code>purpose_not_allowed</code></li>
+          <li><code>per_payment_limit_exceeded</code></li>
+          <li><code>budget_exceeded</code></li>
+        </ul>
+
+        <h3>Receipt</h3>
+        <p>A receipt is recorded after payment settlement or verification.</p>
+        <pre><code>{
+  "id": "receipt_...",
+  "grantId": "grant_research",
+  "agentId": "research-agent",
+  "merchant": "data.example.com",
+  "amount": { "amount": "0.05", "currency": "USDC" },
+  "purpose": "research",
+  "rail": "x402",
+  "network": "base",
+  "resource": "/report",
+  "transactionHash": "0x..."
+}</code></pre>
+
+        <h2>Current Boundary</h2>
+        <p>PayAI is not a wallet, facilitator, or payment rail. The first implementation provides local policy enforcement and receipt recording. Production integrations should plug in a real x402 client, wallet, facilitator, approval service, and persistent ledger.</p>
+      </main>
+    </div>
+  </body>
+</html>

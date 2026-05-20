@@ -35,9 +35,9 @@ const payaiFetch = createPayAIFetch({
 
 ## Read This First
 
-1. [Getting Started](getting-started.md) - local setup, checks, and demo.
-2. [Protocol Notes](protocol.md) - PayAI's relationship to x402.
-3. [Publishing](publishing.md) - package release process and npm status.
+1. [Getting Started]({{ '/getting-started/' | relative_url }}) - local setup, checks, and demo.
+2. [Protocol Notes]({{ '/protocol/' | relative_url }}) - PayAI's relationship to x402.
+3. [Publishing]({{ '/publishing/' | relative_url }}) - package release process and npm status.
 
 ## Current Release
 

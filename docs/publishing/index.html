@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Publishing | PayAI Docs</title>
+    <meta name="description" content="Publishing notes for PayAI npm packages.">
+    <link rel="stylesheet" href="/docs/assets/docs.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/docs/">
+        <span class="brand-mark">⚡</span>
+        <span>PayAI docs</span>
+      </a>
+      <nav class="topnav" aria-label="Main navigation">
+        <a href="/docs/">Docs</a>
+        <a href="https://payai.sh">Website</a>
+        <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Documentation navigation">
+        <div class="nav-section">
+          <p>Start</p>
+          <a href="/docs/">Overview</a>
+          <a href="/docs/getting-started/">Getting Started</a>
+          <a href="/docs/protocol/">Protocol Notes</a>
+          <a href="/docs/publishing/" aria-current="page">Publishing</a>
+        </div>
+        <div class="nav-section">
+          <p>Project</p>
+          <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/core">npm core</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/x402">npm x402</a>
+        </div>
+      </aside>
+      <main class="content">
+        <h1>Publishing</h1>
+        <p>PayAI packages are published under the <code>@payai-sh</code> npm scope:</p>
+        <ul>
+          <li><code>@payai-sh/core</code></li>
+          <li><code>@payai-sh/x402</code></li>
+        </ul>
+
+        <h2>Current Public Release</h2>
+        <ul>
+          <li><code>@payai-sh/core</code> v0.0.1</li>
+          <li><code>@payai-sh/x402</code> v0.0.1</li>
+        </ul>
+
+        <h2>Prerequisite</h2>
+        <p>The npm account used for publishing must own or belong to the <code>payai-sh</code> npm organization/scope.</p>
+        <p>If publishing returns:</p>
+        <pre><code>404 Not Found - PUT https://registry.npmjs.org/@payai-sh%2fcore</code></pre>
+        <p>then npm does not recognize the token as having publish access for <code>@payai-sh</code>.</p>
+        <p>If publishing returns:</p>
+        <pre><code>404 Not Found - PUT https://registry.npmjs.org/@payai-sh%2fcore - Scope not found</code></pre>
+        <p>then the <code>payai-sh</code> npm organization/scope does not exist yet.</p>
+
+        <h2>Verify</h2>
+        <pre><code>npm run check
+npm run publish:dry-run</code></pre>
+
+        <h2>Publish</h2>
+        <p>Publish core first:</p>
+        <pre><code>cd packages/core
+npm publish --access public</code></pre>
+
+        <p>Then publish the x402 adapter:</p>
+        <pre><code>cd ../x402
+npm publish --access public</code></pre>
+
+        <h2>Token</h2>
+        <p>Use an npm automation token with publish rights for the <code>@payai-sh</code> scope.</p>
+      </main>
+    </div>
+  </body>
+</html>
