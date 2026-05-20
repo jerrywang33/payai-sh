@@ -8,7 +8,8 @@
     "packages/*"
   ],
   "scripts": {
-    "check": "tsc -b packages/core packages/x402",
+    "check": "tsc -b packages/core packages/x402 && node --test packages/*/test/*.test.mjs",
+    "demo": "node examples/research-agent/demo.mjs",
     "dev": "python3 -m http.server 5173"
   },
   "keywords": [

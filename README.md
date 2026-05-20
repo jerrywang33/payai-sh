@@ -40,6 +40,39 @@ const response = await payaiFetch("https://data.example.com/report", {
 });
 ```
 
+## Run Locally
+
+```bash
+npm install
+npm run check
+npm run demo
+```
+
+`npm run demo` simulates the first MVP flow:
+
+```text
+agent requests paid API
+API returns 402 Payment Required
+PayAI checks grant and allows the payment
+mock x402 payer retries the request
+API returns the paid resource
+PayAI records a receipt
+```
+
 ## Status
 
 Early scaffold. The first implementation focuses on the policy primitives and a rail adapter shape for x402 on Base USDC.
+
+## Boundary
+
+PayAI is:
+
+- a policy layer for agent spending grants
+- a receipt layer for agent payments
+- a wrapper around payment rails such as x402
+
+PayAI is not:
+
+- a wallet
+- a facilitator
+- a new payment rail
