@@ -1,6 +1,5 @@
 const canvas = document.querySelector("#agent-field");
 const context = canvas.getContext("2d");
-const form = document.querySelector(".waitlist-form");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 let width = 0;
@@ -73,24 +72,7 @@ function draw() {
   animationFrame = requestAnimationFrame(draw);
 }
 
-function handleFormSubmit(event) {
-  event.preventDefault();
-  const email = new FormData(form).get("email");
-  const button = form.querySelector("button");
-
-  if (!email) {
-    form.querySelector("input").focus();
-    return;
-  }
-
-  button.textContent = "Opening email...";
-  const subject = encodeURIComponent("PayAI early access");
-  const body = encodeURIComponent(`Please add me to the PayAI early access list.\n\nEmail: ${email}`);
-  window.location.href = `mailto:lang6.lv@gmail.com?subject=${subject}&body=${body}`;
-}
-
 window.addEventListener("resize", resize);
-form.addEventListener("submit", handleFormSubmit);
 
 resize();
 

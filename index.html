@@ -32,7 +32,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260520-cta" />
+    <link rel="stylesheet" href="./styles.css?v=20260520-docs" />
   </head>
   <body>
     <canvas id="agent-field" aria-hidden="true"></canvas>
@@ -46,21 +46,25 @@
         <a href="#x402">x402</a>
         <a href="#policy">Policy</a>
         <a href="#sdk">SDK</a>
-        <a href="#waitlist">Waitlist</a>
       </nav>
       <div class="header-actions">
-        <a class="header-cta" href="#waitlist">Get early access</a>
-        <a class="social-link" href="https://x.com/jerrydev90" target="_blank" rel="noreferrer" aria-label="Jerry on X">
-          X
-        </a>
         <a
-          class="social-link"
+          class="header-link"
           href="https://github.com/jerrywang33/payai-sh"
           target="_blank"
           rel="noreferrer"
           aria-label="PayAI on GitHub"
         >
-          GH
+          GitHub
+        </a>
+        <a
+          class="header-link header-link-primary"
+          href="https://github.com/jerrywang33/payai-sh/tree/main/docs"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="PayAI documentation"
+        >
+          Docs
         </a>
       </div>
     </header>
@@ -75,7 +79,7 @@
             data, compute, and tools without receiving a blank check.
           </p>
           <div class="hero-actions" aria-label="Primary actions">
-            <a class="button button-primary" href="#waitlist">Join early access</a>
+            <a class="button button-primary" href="https://github.com/jerrywang33/payai-sh/tree/main/docs" target="_blank" rel="noreferrer">Read docs</a>
             <a class="button button-secondary" href="#x402">See x402 relationship</a>
           </div>
         </div>
@@ -257,20 +261,18 @@ const response = await payai.fetch(
         </div>
       </section>
 
-      <section class="final-cta" id="waitlist" aria-labelledby="waitlist-title">
+      <section class="final-cta" aria-labelledby="final-title">
         <div class="final-cta-copy">
-          <p class="eyebrow">Early access</p>
-          <h2 id="waitlist-title">Make x402 safe for autonomous agents.</h2>
+          <p class="eyebrow">Open source</p>
+          <h2 id="final-title">Make x402 safe for autonomous agents.</h2>
           <p>
-            We are building the open-source policy and receipt layer for x402 payments. Join the first group of
-            builders testing agent budgets, approvals, and audit logs.
+            Start with the SDK, inspect the policy primitives, and wire PayAI into an x402 payment flow.
           </p>
         </div>
-        <form class="waitlist-form">
-          <label class="sr-only" for="email">Email address</label>
-          <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
-          <button type="submit">Join waitlist</button>
-        </form>
+        <div class="final-actions" aria-label="Project links">
+          <a class="button button-primary" href="https://github.com/jerrywang33/payai-sh/tree/main/docs" target="_blank" rel="noreferrer">Read docs</a>
+          <a class="button button-secondary" href="https://github.com/jerrywang33/payai-sh" target="_blank" rel="noreferrer">View GitHub</a>
+        </div>
       </section>
     </main>
 
@@ -279,6 +281,6 @@ const response = await payai.fetch(
       <span>Built on x402. Designed for agent payments.</span>
     </footer>
 
-    <script src="./script.js?v=20260520-cta"></script>
+    <script src="./script.js?v=20260520-docs"></script>
   </body>
 </html>

@@ -121,10 +121,9 @@ main,
   gap: 0.5rem;
 }
 
-.header-cta,
-.social-link,
+.header-link,
 .button,
-.waitlist-form button {
+.final-actions a {
   align-items: center;
   border: 1px solid transparent;
   border-radius: 8px;
@@ -141,31 +140,35 @@ main,
   white-space: nowrap;
 }
 
-.header-cta {
-  background: rgba(247, 243, 234, 0.08);
-  border-color: var(--line);
-  font-size: 0.92rem;
-}
-
-.social-link {
+.header-link {
   background: transparent;
   border-color: rgba(247, 243, 234, 0.1);
   color: var(--muted);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.9rem;
-  min-height: 2.45rem;
-  padding-inline: 0.78rem;
+  font-size: 0.92rem;
+  min-height: 2.5rem;
+  padding-inline: 0.95rem;
 }
 
-.social-link:hover {
+.header-link:hover {
   background: rgba(247, 243, 234, 0.06);
   color: var(--ink);
 }
 
-.header-cta:hover,
-.social-link:hover,
+.header-link-primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #14120f;
+}
+
+.header-link-primary:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #14120f;
+}
+
+.header-link:hover,
 .button:hover,
-.waitlist-form button:hover {
+.final-actions a:hover {
   transform: translateY(-1px);
 }
 
@@ -553,43 +556,13 @@ dd {
   max-width: 48rem;
 }
 
-.waitlist-form {
+.final-actions {
   align-self: center;
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.75rem;
-  grid-template-columns: 1fr auto;
   margin-top: 0;
-  max-width: 42rem;
-  width: 100%;
-}
-
-.waitlist-form input {
-  background: rgba(23, 21, 18, 0.72);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--ink);
-  min-height: 3.2rem;
-  min-width: 0;
-  padding: 0 1rem;
-  width: 100%;
-}
-
-.waitlist-form input:focus {
-  border-color: var(--mint);
-  outline: 2px solid rgba(111, 231, 183, 0.18);
-  outline-offset: 2px;
-}
-
-.waitlist-form button {
-  background: var(--mint);
-  color: #101511;
-  min-height: 3.2rem;
-}
-
-.waitlist-form button:disabled {
-  cursor: default;
-  opacity: 0.72;
-  transform: none;
+  justify-content: center;
 }
 
 .site-footer {
@@ -653,12 +626,7 @@ dd {
     width: 100%;
   }
 
-  .header-cta {
-    min-height: 2.35rem;
-    padding-inline: 0.8rem;
-  }
-
-  .social-link {
+  .header-link {
     min-height: 2.35rem;
     padding-inline: 0.8rem;
   }
@@ -680,7 +648,6 @@ dd {
   }
 
   dl div,
-  .waitlist-form,
   .site-footer {
     grid-template-columns: 1fr;
   }
@@ -697,7 +664,6 @@ dd {
     margin-bottom: 0.25rem;
   }
 
-  .waitlist-form,
   .site-footer {
     display: grid;
   }
@@ -712,10 +678,9 @@ dd {
     display: none;
   }
 
-  .header-cta,
-  .social-link,
+  .header-link,
   .button,
-  .waitlist-form button {
+  .final-actions a {
     transition: none;
   }
 }
