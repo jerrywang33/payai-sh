@@ -6,6 +6,6 @@ Grants, policy checks, spending ledgers, and receipts for autonomous agent payme
 import { MemorySpendingLedger, evaluatePayment } from "@payai-sh/core";
 ```
 
-Docs: https://jerrywang33.github.io/payai-sh/
+Docs: https://payai.sh/docs/
 
 License: MIT

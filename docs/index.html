@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PayAI Docs</title>
+    <meta name="description" content="Developer documentation for PayAI.">
+    <link rel="stylesheet" href="/docs/assets/docs.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/docs/">
+        <span class="brand-mark">⚡</span>
+        <span>PayAI docs</span>
+      </a>
+      <nav class="topnav" aria-label="Main navigation">
+        <a href="/docs/">Docs</a>
+        <a href="https://payai.sh">Website</a>
+        <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Documentation navigation">
+        <div class="nav-section">
+          <p>Start</p>
+          <a href="/docs/">Overview</a>
+          <a href="https://github.com/jerrywang33/payai-sh/blob/main/docs/getting-started.md">Getting Started</a>
+          <a href="https://github.com/jerrywang33/payai-sh/blob/main/docs/protocol.md">Protocol Notes</a>
+          <a href="https://github.com/jerrywang33/payai-sh/blob/main/docs/publishing.md">Publishing</a>
+        </div>
+        <div class="nav-section">
+          <p>Project</p>
+          <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/core">npm core</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/x402">npm x402</a>
+        </div>
+      </aside>
+      <main class="content">
+        <h1>PayAI Docs</h1>
+        <p>The payment policy layer for AI agents, built on x402.</p>
+        <p>PayAI does not replace x402. x402 executes paid HTTP requests. PayAI decides whether an autonomous agent is allowed to pay before the request is retried, then records a receipt after settlement.</p>
+
+        <pre><code>x402 answers: how does an agent pay?
+PayAI answers: should this agent be allowed to pay?</code></pre>
+
+        <h2>Quick Start</h2>
+        <p>Install the published packages:</p>
+        <pre><code>npm install @payai-sh/core @payai-sh/x402</code></pre>
+
+        <p>Use the x402 wrapper:</p>
+        <pre><code>import { createPayAIFetch } from "@payai-sh/x402";
+
+const payaiFetch = createPayAIFetch({
+  grant,
+  payer: async (request) => request.fetch(request.paymentHeaders)
+});</code></pre>
+
+        <h2>Read This First</h2>
+        <ol>
+          <li><a href="https://github.com/jerrywang33/payai-sh/blob/main/docs/getting-started.md">Getting Started</a> - local setup, checks, and demo.</li>
+          <li><a href="https://github.com/jerrywang33/payai-sh/blob/main/docs/protocol.md">Protocol Notes</a> - PayAI's relationship to x402.</li>
+          <li><a href="https://github.com/jerrywang33/payai-sh/blob/main/docs/publishing.md">Publishing</a> - package release process and npm status.</li>
+        </ol>
+
+        <h2>Current Release</h2>
+        <ul>
+          <li><code>@payai-sh/core@0.0.1</code></li>
+          <li><code>@payai-sh/x402@0.0.1</code></li>
+        </ul>
+
+        <h2>Boundary</h2>
+        <p>PayAI is a policy and receipt layer. It is not a wallet, facilitator, or new payment rail.</p>
+
+        <h2>License</h2>
+        <p>MIT. See <a href="https://github.com/jerrywang33/payai-sh/blob/main/LICENSE">LICENSE</a>.</p>
+      </main>
+    </div>
+  </body>
+</html>
