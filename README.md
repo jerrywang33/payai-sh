@@ -79,6 +79,11 @@ PayAI is not:
 
 ## Docs
 
+- Developer docs: https://jerrywang33.github.io/payai-sh/
 - [Getting started](docs/getting-started.md)
 - [Protocol notes](docs/protocol.md)
 - [Publishing](docs/publishing.md)
+
+## License
+
+MIT. See [LICENSE](LICENSE).

@@ -6,4 +6,6 @@ x402-compatible fetch wrapper with PayAI policy enforcement.
 import { createPayAIFetch } from "@payai-sh/x402";
 ```
 
-See the main repository for docs: https://github.com/jerrywang33/payai-sh
+Docs: https://jerrywang33.github.io/payai-sh/
+
+License: MIT

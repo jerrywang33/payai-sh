@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title | default: site.title }} | PayAI</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <link rel="stylesheet" href="{{ '/assets/docs.css' | relative_url }}">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="{{ '/' | relative_url }}">
+        <span class="brand-mark">⚡</span>
+        <span>PayAI docs</span>
+      </a>
+      <nav class="topnav" aria-label="Main navigation">
+        <a href="{{ '/' | relative_url }}">Docs</a>
+        <a href="https://payai.sh">Website</a>
+        <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Documentation navigation">
+        <div class="nav-section">
+          <p>Start</p>
+          <a href="{{ '/' | relative_url }}">Overview</a>
+          <a href="{{ '/getting-started/' | relative_url }}">Getting Started</a>
+          <a href="{{ '/protocol/' | relative_url }}">Protocol Notes</a>
+          <a href="{{ '/publishing/' | relative_url }}">Publishing</a>
+        </div>
+        <div class="nav-section">
+          <p>Project</p>
+          <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/core">npm core</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/x402">npm x402</a>
+        </div>
+      </aside>
+      <main class="content">
+        {{ content }}
+      </main>
+    </div>
+  </body>
+</html>
