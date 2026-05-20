@@ -41,8 +41,8 @@ const payaiFetch = createPayAIFetch({
 
 ## Current Release
 
-- `@payai-sh/core@0.0.1`
-- `@payai-sh/x402@0.0.1`
+- `@payai-sh/core` v0.0.1
+- `@payai-sh/x402` v0.0.1
 
 ## Boundary
 
