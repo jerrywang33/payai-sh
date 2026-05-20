@@ -1,5 +1,5 @@
 {
-  "name": "payai",
+  "name": "payai-sh",
   "version": "0.0.0",
   "private": true,
   "description": "The payment policy layer for AI agents, built on x402.",
@@ -21,7 +21,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jerrywang33/payai.git"
+    "url": "git+https://github.com/jerrywang33/payai-sh.git"
   },
   "devDependencies": {
     "typescript": "^5.8.3"
