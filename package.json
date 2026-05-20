@@ -1,0 +1,29 @@
+{
+  "name": "payai",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The payment policy layer for AI agents, built on x402.",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "check": "tsc -b packages/core packages/x402",
+    "dev": "python3 -m http.server 5173"
+  },
+  "keywords": [
+    "x402",
+    "ai-agents",
+    "payments",
+    "policy",
+    "receipts"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerrywang33/payai.git"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

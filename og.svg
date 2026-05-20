@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">PayAI</title>
+  <desc id="desc">The payment policy layer for AI agents. Built on x402.</desc>
+  <defs>
+    <radialGradient id="mint" cx="20%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#6fe7b7" stop-opacity="0.32" />
+      <stop offset="100%" stop-color="#171512" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="coral" cx="86%" cy="20%" r="64%">
+      <stop offset="0%" stop-color="#f07c64" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#171512" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#171512" />
+  <rect width="1200" height="630" fill="url(#mint)" />
+  <rect width="1200" height="630" fill="url(#coral)" />
+  <g opacity="0.34" stroke="#f7f3ea" stroke-width="2">
+    <path d="M756 126 910 188 1022 104" fill="none" />
+    <path d="M708 380 874 298 1026 398" fill="none" />
+    <path d="M148 470 310 392 440 500" fill="none" />
+  </g>
+  <g>
+    <circle cx="756" cy="126" r="5" fill="#6fe7b7" />
+    <circle cx="910" cy="188" r="5" fill="#64c7f0" />
+    <circle cx="1022" cy="104" r="5" fill="#f0c45a" />
+    <circle cx="708" cy="380" r="5" fill="#f0c45a" />
+    <circle cx="874" cy="298" r="5" fill="#6fe7b7" />
+    <circle cx="1026" cy="398" r="5" fill="#64c7f0" />
+    <circle cx="148" cy="470" r="5" fill="#64c7f0" />
+    <circle cx="310" cy="392" r="5" fill="#6fe7b7" />
+    <circle cx="440" cy="500" r="5" fill="#f0c45a" />
+  </g>
+  <g transform="translate(76 82)">
+    <rect width="56" height="56" rx="14" fill="#f7f3ea" fill-opacity="0.1" stroke="#f7f3ea" stroke-opacity="0.18" />
+    <text x="28" y="38" text-anchor="middle" font-family="Apple Color Emoji, Segoe UI Emoji, sans-serif" font-size="34">⚡</text>
+    <text x="72" y="37" fill="#f7f3ea" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800">PayAI</text>
+  </g>
+  <text x="76" y="220" fill="#6fe7b7" font-family="JetBrains Mono, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="700">BUILT ON X402. BASE-FIRST. RAIL-AGNOSTIC.</text>
+  <text x="76" y="332" fill="#f7f3ea" font-family="Inter, Arial, sans-serif" font-size="82" font-weight="800">The payment policy</text>
+  <text x="76" y="424" fill="#f7f3ea" font-family="Inter, Arial, sans-serif" font-size="82" font-weight="800">layer for AI agents.</text>
+  <text x="80" y="506" fill="#b9b2a7" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="500">Budgets, approvals, and receipts for autonomous x402 payments.</text>
+  <g transform="translate(80 544)" fill="#f7f3ea" font-family="JetBrains Mono, SFMono-Regular, Menlo, monospace" font-size="20" font-weight="700">
+    <rect width="192" height="44" rx="8" fill="#f0c45a" />
+    <text x="24" y="29" fill="#15120d">@payai-sh/*</text>
+  </g>
+</svg>

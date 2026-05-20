@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PayAI - Payment Policy Layer for AI Agents</title>
+    <meta
+      name="description"
+      content="PayAI adds budgets, approvals, and receipts to x402 payments for autonomous AI agents."
+    />
+    <meta property="og:title" content="PayAI - Payment Policy Layer for AI Agents" />
+    <meta
+      property="og:description"
+      content="Budgets, approvals, and receipts for x402 payments by autonomous AI agents."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://payai.sh/" />
+    <meta property="og:image" content="https://payai.sh/og.svg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://payai.sh/og.svg" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23171512'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='40'%3E%E2%9A%A1%EF%B8%8F%3C/text%3E%3C/svg%3E"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23171512'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='112'%3E%E2%9A%A1%EF%B8%8F%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260520-cta" />
+  </head>
+  <body>
+    <canvas id="agent-field" aria-hidden="true"></canvas>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="PayAI home">
+        <span class="brand-mark" aria-hidden="true">⚡️</span>
+        <span>PayAI</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#x402">x402</a>
+        <a href="#policy">Policy</a>
+        <a href="#sdk">SDK</a>
+        <a href="#waitlist">Waitlist</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-cta" href="#waitlist">Get early access</a>
+        <a class="social-link" href="https://x.com/jerrydev90" target="_blank" rel="noreferrer" aria-label="Jerry on X">
+          X
+        </a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Built on x402. Base-first. Rail-agnostic.</p>
+          <h1 id="hero-title">The payment policy layer for AI agents.</h1>
+          <p class="hero-subtitle">
+            PayAI adds budgets, approvals, and receipts to x402 payments, so autonomous agents can pay for APIs,
+            data, compute, and tools without receiving a blank check.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button button-primary" href="#waitlist">Join early access</a>
+            <a class="button button-secondary" href="#x402">See x402 relationship</a>
+          </div>
+        </div>
+
+        <div class="hero-terminal" aria-label="PayAI payment policy example">
+          <div class="terminal-top">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <pre><code>agent requests paid API
+API returns 402 Payment Required
+
+PayAI checks grant:
+  budget: 10 USDC
+  per_payment_limit: 0.25 USDC
+  allowed_purpose: research
+
+decision: allow
+rail: x402 on Base USDC
+receipt: recorded</code></pre>
+        </div>
+      </section>
+
+      <section class="trust-strip" aria-label="PayAI positioning">
+        <p>x402 answers <strong>how agents pay</strong>.</p>
+        <p>PayAI answers <strong>whether agents should pay</strong>.</p>
+        <p>Receipts explain <strong>why they paid</strong>.</p>
+      </section>
+
+      <section class="section relation-section" id="x402" aria-labelledby="x402-title">
+        <div class="section-heading">
+          <p class="eyebrow">Relationship to x402</p>
+          <h2 id="x402-title">We extend x402. We do not replace it.</h2>
+          <p>
+            x402 is the payment execution layer. PayAI sits before and after the payment: policy before the
+            signature, receipt after settlement.
+          </p>
+        </div>
+
+        <div class="split-grid">
+          <article class="panel">
+            <div class="panel-label">x402</div>
+            <h3>Payment execution</h3>
+            <ul>
+              <li>Returns HTTP 402 payment requirements</li>
+              <li>Defines price, network, asset, and recipient</li>
+              <li>Lets wallets or agents sign the payment</li>
+              <li>Verifies and settles the paid request</li>
+            </ul>
+          </article>
+
+          <article class="panel accent">
+            <div class="panel-label">PayAI</div>
+            <h3>Policy and receipts</h3>
+            <ul>
+              <li>Checks budget, merchant, purpose, and limits</li>
+              <li>Routes approvals for sensitive payments</li>
+              <li>Links spend to agent tasks and tool calls</li>
+              <li>Records audit-ready receipts for teams</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="flow" aria-label="x402 and PayAI request flow">
+          <div class="flow-step">Agent</div>
+          <div class="flow-line"></div>
+          <div class="flow-step">PayAI Policy</div>
+          <div class="flow-line"></div>
+          <div class="flow-step">x402 Payment</div>
+          <div class="flow-line"></div>
+          <div class="flow-step">PayAI Receipt</div>
+        </div>
+
+        <div class="boundary-row" aria-label="Product boundary">
+          <span>Not a wallet</span>
+          <span>Not a facilitator</span>
+          <span>Not a new payment rail</span>
+        </div>
+      </section>
+
+      <section class="section policy-section" id="policy" aria-labelledby="policy-title">
+        <div class="section-heading">
+          <p class="eyebrow">Core primitives</p>
+          <h2 id="policy-title">Give agents spend permissions, not unlimited wallets.</h2>
+          <p>
+            PayAI models the controls a real team needs before allowing autonomous software to spend money.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <span class="feature-icon">01</span>
+            <h3>Grants</h3>
+            <p>Define who can spend, how much, where, for what purpose, and until when.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-icon">02</span>
+            <h3>Policies</h3>
+            <p>Evaluate every x402 payment request against budget, merchant, risk, and task context.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-icon">03</span>
+            <h3>Approvals</h3>
+            <p>Escalate unfamiliar merchants, large payments, or sensitive categories to a human.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-icon">04</span>
+            <h3>Receipts</h3>
+            <p>Record amount, asset, network, tx hash, resource hash, task id, and agent rationale.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section sdk-section" id="sdk" aria-labelledby="sdk-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Developer experience</p>
+          <h2 id="sdk-title">Wrap agent fetch. Enforce policy before payment.</h2>
+        </div>
+
+        <div class="code-layout">
+          <div class="code-block">
+            <div class="code-title">@payai-sh/x402</div>
+            <pre><code>import { createPayAI } from "@payai-sh/x402";
+
+const payai = createPayAI({
+  agentId: "research-agent",
+  network: "base",
+  currency: "USDC",
+  grant: "./grant.json",
+});
+
+const response = await payai.fetch(
+  "https://data.example.com/report",
+  { purpose: "research" }
+);</code></pre>
+          </div>
+
+          <div class="code-notes">
+            <h3>Base-first, not Base-only.</h3>
+            <p>
+              The first adapter targets x402 payments on Base with USDC. The protocol stays rail-agnostic so teams
+              can add Solana, Polygon, Stripe, or internal balance rails later.
+            </p>
+            <dl>
+              <div>
+                <dt>Package scope</dt>
+                <dd>@payai-sh/*</dd>
+              </div>
+              <div>
+                <dt>Default rail</dt>
+                <dd>x402 on Base USDC</dd>
+              </div>
+              <div>
+                <dt>Policy mode</dt>
+                <dd>Local JSON grants or hosted dashboard</dd>
+              </div>
+              <div>
+                <dt>Receipt mode</dt>
+                <dd>Offchain log with optional hash anchoring</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="section use-cases" aria-labelledby="use-cases-title">
+        <div class="section-heading">
+          <p class="eyebrow">Where it starts</p>
+          <h2 id="use-cases-title">A control plane for agentic spend.</h2>
+        </div>
+
+        <div class="use-case-row">
+          <span>Paid APIs</span>
+          <span>MCP servers</span>
+          <span>Data providers</span>
+          <span>Compute jobs</span>
+          <span>Agent marketplaces</span>
+        </div>
+      </section>
+
+      <section class="final-cta" id="waitlist" aria-labelledby="waitlist-title">
+        <div class="final-cta-copy">
+          <p class="eyebrow">Early access</p>
+          <h2 id="waitlist-title">Make x402 safe for autonomous agents.</h2>
+          <p>
+            We are building the open-source policy and receipt layer for x402 payments. Join the first group of
+            builders testing agent budgets, approvals, and audit logs.
+          </p>
+        </div>
+        <form class="waitlist-form">
+          <label class="sr-only" for="email">Email address</label>
+          <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
+          <button type="submit">Join waitlist</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>PayAI</span>
+      <span>Built on x402. Designed for agent payments.</span>
+    </footer>
+
+    <script src="./script.js?v=20260520-cta"></script>
+  </body>
+</html>

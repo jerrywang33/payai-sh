@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.wrangler/
+.DS_Store
+dist/
+packages/*/dist/
+*.tsbuildinfo
+packages/*/*.tsbuildinfo

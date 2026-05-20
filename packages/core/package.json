@@ -1,0 +1,19 @@
+{
+  "name": "@payai-sh/core",
+  "version": "0.0.1",
+  "description": "Grants, policies, and receipts for autonomous agent payments.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "check": "tsc -p tsconfig.json"
+  },
+  "license": "MIT"
+}

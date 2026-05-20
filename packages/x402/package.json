@@ -1,0 +1,22 @@
+{
+  "name": "@payai-sh/x402",
+  "version": "0.0.1",
+  "description": "x402 fetch wrapper with PayAI policy enforcement.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "check": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@payai-sh/core": "file:../core"
+  },
+  "license": "MIT"
+}
