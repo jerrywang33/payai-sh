@@ -1,6 +1,16 @@
 # Getting Started
 
-Install dependencies:
+## Use From npm
+
+Install the published packages:
+
+```bash
+npm install @payai-sh/core @payai-sh/x402
+```
+
+## Run Locally
+
+Clone the repository and install dependencies:
 
 ```bash
 npm install

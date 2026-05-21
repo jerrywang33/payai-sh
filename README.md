@@ -14,6 +14,12 @@ PayAI answers: should this agent be allowed to pay?
 - `@payai-sh/core`: grants, policy checks, spending ledger, and receipts
 - `@payai-sh/x402`: x402-compatible fetch wrapper with PayAI policy enforcement
 
+## Install
+
+```bash
+npm install @payai-sh/core @payai-sh/x402
+```
+
 ## Example
 
 ```ts
