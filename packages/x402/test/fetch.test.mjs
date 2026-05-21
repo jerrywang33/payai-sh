@@ -127,3 +127,30 @@ test("retries a POST request without losing the body", async () => {
     JSON.stringify({ query: "agent payments" }),
   ]);
 });
+
+test("rejects invalid x402 quotes before calling payer", async () => {
+  const payaiFetch = createPayAIFetch({
+    grant: {
+      id: "grant_invalid_quote",
+      agentId: "agent_test",
+      totalBudget: { amount: "1", currency: "USDC" },
+    },
+    fetch: async () =>
+      Response.json(
+        {
+          amount: "-0.10",
+          currency: "USDC",
+          merchant: "data.example.com",
+        },
+        { status: 402 },
+      ),
+    payer: async () => {
+      throw new Error("payer should not run");
+    },
+  });
+
+  await assert.rejects(
+    () => payaiFetch("https://data.example.com/report"),
+    /Invalid payment quote/,
+  );
+});

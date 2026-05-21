@@ -2,6 +2,7 @@ import {
   MemorySpendingLedger,
   createReceipt,
   evaluatePayment,
+  parsePaymentQuote,
   type PaymentQuote,
   type PaymentReceipt,
   type SpendingGrant,
@@ -119,7 +120,7 @@ function normalizeQuote(raw: Record<string, unknown>, merchant: string, init: Pa
   const currency = String(raw.currency ?? raw.asset ?? "USDC");
   if (!amount) throw new Error("x402 quote is missing amount");
 
-  return {
+  return parsePaymentQuote({
     merchant: String(raw.merchant ?? raw.payTo ?? merchant),
     amount: {
       amount,
@@ -130,7 +131,7 @@ function normalizeQuote(raw: Record<string, unknown>, merchant: string, init: Pa
     rail: "x402",
     network: stringOrUndefined(raw.network) ?? stringOrUndefined(raw.chain) ?? "base",
     expiresAt: stringOrUndefined(raw.expiresAt),
-  };
+  });
 }
 
 function toRequest(input: string | URL | Request, init: RequestInit): Request {

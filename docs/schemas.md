@@ -2,6 +2,19 @@
 
 The core package exports TypeScript interfaces for grants, quotes, decisions, receipts, and ledgers.
 
+It also exports runtime validation helpers:
+
+- `validateMoney`
+- `parseMoney`
+- `validateSpendingGrant`
+- `parseSpendingGrant`
+- `validatePaymentQuote`
+- `parsePaymentQuote`
+- `validatePaymentReceipt`
+- `parsePaymentReceipt`
+
+`validate*` returns a list of issues. `parse*` returns the typed object or throws `PayAIValidationError`.
+
 ## Money
 
 ```ts
@@ -25,6 +38,12 @@ interface SpendingGrant {
   allowedPurposes?: string[];
   expiresAt?: string;
 }
+```
+
+```ts
+import { parseSpendingGrant } from "@payai-sh/core";
+
+const grant = parseSpendingGrant(json);
 ```
 
 ## PaymentQuote

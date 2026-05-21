@@ -18,8 +18,8 @@ PayAI answers: should this agent be allowed to pay?
 
 Current npm release:
 
-- `@payai-sh/core` v0.0.2
-- `@payai-sh/x402` v0.0.2
+- `@payai-sh/core` v0.0.3
+- `@payai-sh/x402` v0.0.3
 
 The current implementation is a local policy and receipt layer. Production systems should connect the payer callback to a real x402 client or facilitator, use a persistent ledger, and add human approval workflows for high-risk payments.
 

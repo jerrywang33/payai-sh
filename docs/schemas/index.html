@@ -41,6 +41,8 @@
       <main class="content">
         <h1>Schemas</h1>
         <p>The core package exports TypeScript interfaces for grants, quotes, decisions, receipts, and ledgers.</p>
+        <p>It also exports runtime validation helpers: <code>validateMoney</code>, <code>parseMoney</code>, <code>validateSpendingGrant</code>, <code>parseSpendingGrant</code>, <code>validatePaymentQuote</code>, <code>parsePaymentQuote</code>, <code>validatePaymentReceipt</code>, and <code>parsePaymentReceipt</code>.</p>
+        <p><code>validate*</code> returns a list of issues. <code>parse*</code> returns the typed object or throws <code>PayAIValidationError</code>.</p>
 
         <h2>Money</h2>
         <pre><code>interface Money {
@@ -59,6 +61,9 @@
   allowedPurposes?: string[];
   expiresAt?: string;
 }</code></pre>
+        <pre><code>import { parseSpendingGrant } from "@payai-sh/core";
+
+const grant = parseSpendingGrant(json);</code></pre>
 
         <h2>PaymentQuote</h2>
         <pre><code>interface PaymentQuote {

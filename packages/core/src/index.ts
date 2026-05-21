@@ -48,10 +48,25 @@ export interface PaymentReceipt {
   createdAt: string;
 }
 
+export interface ValidationIssue {
+  path: string;
+  message: string;
+}
+
 export interface SpendingLedger {
   getSpent(grantId: string): Money | undefined;
   record(receipt: PaymentReceipt): void;
   list(grantId?: string): PaymentReceipt[];
+}
+
+export class PayAIValidationError extends Error {
+  readonly issues: ValidationIssue[];
+
+  constructor(message: string, issues: ValidationIssue[]) {
+    super(`${message}: ${issues.map((issue) => `${issue.path} ${issue.message}`).join("; ")}`);
+    this.name = "PayAIValidationError";
+    this.issues = issues;
+  }
 }
 
 export class MemorySpendingLedger implements SpendingLedger {
@@ -73,6 +88,112 @@ export class MemorySpendingLedger implements SpendingLedger {
   list(grantId?: string): PaymentReceipt[] {
     return grantId ? this.receipts.filter((receipt) => receipt.grantId === grantId) : [...this.receipts];
   }
+}
+
+export function validateMoney(value: unknown, path = "money"): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+
+  if (!isRecord(value)) {
+    return [{ path, message: "must be an object" }];
+  }
+
+  if (!isString(value.amount)) {
+    issues.push({ path: `${path}.amount`, message: "must be a decimal string" });
+  } else if (!isValidAmount(value.amount)) {
+    issues.push({ path: `${path}.amount`, message: "must be non-negative with up to 6 decimal places" });
+  }
+
+  if (!isString(value.currency) || value.currency.length === 0) {
+    issues.push({ path: `${path}.currency`, message: "must be a non-empty string" });
+  }
+
+  return issues;
+}
+
+export function parseMoney(value: unknown, path = "money"): Money {
+  const issues = validateMoney(value, path);
+  if (issues.length) throw new PayAIValidationError("Invalid money", issues);
+  return value as Money;
+}
+
+export function validateSpendingGrant(value: unknown, path = "grant"): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+
+  if (!isRecord(value)) {
+    return [{ path, message: "must be an object" }];
+  }
+
+  issues.push(...requiredString(value.id, `${path}.id`));
+  issues.push(...requiredString(value.agentId, `${path}.agentId`));
+  issues.push(...validateMoney(value.totalBudget, `${path}.totalBudget`));
+
+  if ("perPaymentLimit" in value && value.perPaymentLimit !== undefined) {
+    issues.push(...validateMoney(value.perPaymentLimit, `${path}.perPaymentLimit`));
+  }
+
+  issues.push(...optionalStringArray(value.allowedMerchants, `${path}.allowedMerchants`));
+  issues.push(...optionalStringArray(value.allowedPurposes, `${path}.allowedPurposes`));
+  issues.push(...optionalIsoDate(value.expiresAt, `${path}.expiresAt`));
+
+  return issues;
+}
+
+export function parseSpendingGrant(value: unknown, path = "grant"): SpendingGrant {
+  const issues = validateSpendingGrant(value, path);
+  if (issues.length) throw new PayAIValidationError("Invalid spending grant", issues);
+  return value as SpendingGrant;
+}
+
+export function validatePaymentQuote(value: unknown, path = "quote"): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+
+  if (!isRecord(value)) {
+    return [{ path, message: "must be an object" }];
+  }
+
+  issues.push(...requiredString(value.merchant, `${path}.merchant`));
+  issues.push(...validateMoney(value.amount, `${path}.amount`));
+  issues.push(...optionalString(value.purpose, `${path}.purpose`));
+  issues.push(...optionalString(value.resource, `${path}.resource`));
+  issues.push(...optionalString(value.rail, `${path}.rail`));
+  issues.push(...optionalString(value.network, `${path}.network`));
+  issues.push(...optionalIsoDate(value.expiresAt, `${path}.expiresAt`));
+
+  return issues;
+}
+
+export function parsePaymentQuote(value: unknown, path = "quote"): PaymentQuote {
+  const issues = validatePaymentQuote(value, path);
+  if (issues.length) throw new PayAIValidationError("Invalid payment quote", issues);
+  return value as PaymentQuote;
+}
+
+export function validatePaymentReceipt(value: unknown, path = "receipt"): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+
+  if (!isRecord(value)) {
+    return [{ path, message: "must be an object" }];
+  }
+
+  issues.push(...requiredString(value.id, `${path}.id`));
+  issues.push(...requiredString(value.grantId, `${path}.grantId`));
+  issues.push(...requiredString(value.agentId, `${path}.agentId`));
+  issues.push(...requiredString(value.merchant, `${path}.merchant`));
+  issues.push(...validateMoney(value.amount, `${path}.amount`));
+  issues.push(...optionalString(value.purpose, `${path}.purpose`));
+  issues.push(...optionalString(value.rail, `${path}.rail`));
+  issues.push(...optionalString(value.network, `${path}.network`));
+  issues.push(...optionalString(value.resource, `${path}.resource`));
+  issues.push(...optionalString(value.transactionHash, `${path}.transactionHash`));
+  issues.push(...requiredIsoDate(value.createdAt, `${path}.createdAt`));
+
+  return issues;
+}
+
+export function parsePaymentReceipt(value: unknown, path = "receipt"): PaymentReceipt {
+  const issues = validatePaymentReceipt(value, path);
+  if (issues.length) throw new PayAIValidationError("Invalid payment receipt", issues);
+  return value as PaymentReceipt;
 }
 
 export function evaluatePayment(grant: SpendingGrant, quote: PaymentQuote, ledger: SpendingLedger): PaymentDecision {
@@ -176,7 +297,7 @@ function assertSameCurrency(left: Money, right: Money): void {
 }
 
 function toMinorUnits(money: Money): bigint {
-  if (!/^\d+(\.\d{1,6})?$/.test(money.amount)) {
+  if (!isValidAmount(money.amount)) {
     throw new Error(`Invalid money amount: ${money.amount}`);
   }
 
@@ -202,4 +323,46 @@ function cryptoSafeId(): string {
   }
 
   return `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function isString(value: unknown): value is string {
+  return typeof value === "string";
+}
+
+function isValidAmount(value: string): boolean {
+  return /^\d+(\.\d{1,6})?$/.test(value);
+}
+
+function requiredString(value: unknown, path: string): ValidationIssue[] {
+  return isString(value) && value.length > 0 ? [] : [{ path, message: "must be a non-empty string" }];
+}
+
+function optionalString(value: unknown, path: string): ValidationIssue[] {
+  return value === undefined || isString(value) ? [] : [{ path, message: "must be a string when provided" }];
+}
+
+function optionalStringArray(value: unknown, path: string): ValidationIssue[] {
+  if (value === undefined) return [];
+  if (!Array.isArray(value)) return [{ path, message: "must be an array of strings when provided" }];
+
+  return value.flatMap((item, index) =>
+    isString(item) && item.length > 0 ? [] : [{ path: `${path}[${index}]`, message: "must be a non-empty string" }],
+  );
+}
+
+function optionalIsoDate(value: unknown, path: string): ValidationIssue[] {
+  if (value === undefined) return [];
+  return requiredIsoDate(value, path);
+}
+
+function requiredIsoDate(value: unknown, path: string): ValidationIssue[] {
+  if (!isString(value) || Number.isNaN(Date.parse(value))) {
+    return [{ path, message: "must be a valid ISO date string" }];
+  }
+
+  return [];
 }
