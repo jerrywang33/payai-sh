@@ -1,6 +1,6 @@
 {
   "name": "@payai-sh/core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Grants, policies, and receipts for autonomous agent payments.",
   "type": "module",
   "homepage": "https://payai.sh",

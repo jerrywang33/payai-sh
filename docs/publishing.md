@@ -7,8 +7,8 @@ PayAI packages are intended to publish under the `@payai-sh` npm scope:
 
 Current public release:
 
-- `@payai-sh/core@0.0.1`
-- `@payai-sh/x402@0.0.1`
+- `@payai-sh/core` v0.0.2
+- `@payai-sh/x402` v0.0.2
 
 ## Prerequisite
 

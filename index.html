@@ -203,16 +203,16 @@ receipt: recorded</code></pre>
         <div class="code-layout">
           <div class="code-block">
             <div class="code-title">@payai-sh/x402</div>
-            <pre><code>import { createPayAI } from "@payai-sh/x402";
+            <pre><code>import { createPayAIFetch } from "@payai-sh/x402";
 
-const payai = createPayAI({
-  agentId: "research-agent",
-  network: "base",
-  currency: "USDC",
-  grant: "./grant.json",
+const payaiFetch = createPayAIFetch({
+  grant,
+  payer: async (request) => {
+    return request.fetch(request.paymentHeaders);
+  },
 });
 
-const response = await payai.fetch(
+const response = await payaiFetch(
   "https://data.example.com/report",
   { purpose: "research" }
 );</code></pre>

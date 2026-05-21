@@ -37,12 +37,15 @@ const payaiFetch = createPayAIFetch({
 
 1. [Getting Started]({{ '/getting-started/' | relative_url }}) - local setup, checks, and demo.
 2. [Protocol Notes]({{ '/protocol/' | relative_url }}) - PayAI's relationship to x402.
-3. [Publishing]({{ '/publishing/' | relative_url }}) - package release process and npm status.
+3. [Architecture]({{ '/architecture/' | relative_url }}) - system boundary and request flow.
+4. [Schemas]({{ '/schemas/' | relative_url }}) - grant, quote, decision, and receipt shapes.
+5. [Agent Integration]({{ '/agent-integration/' | relative_url }}) - safe caller pattern for agents.
+6. [Publishing]({{ '/publishing/' | relative_url }}) - package release process and npm status.
 
 ## Current Release
 
-- `@payai-sh/core` v0.0.1
-- `@payai-sh/x402` v0.0.1
+- `@payai-sh/core` v0.0.2
+- `@payai-sh/x402` v0.0.2
 
 ## Boundary
 

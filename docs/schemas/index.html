@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Schemas | PayAI Docs</title>
+    <meta name="description" content="PayAI grant, quote, decision, and receipt schemas.">
+    <link rel="stylesheet" href="/docs/assets/docs.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/docs/">
+        <span class="brand-mark">⚡</span>
+        <span>PayAI docs</span>
+      </a>
+      <nav class="topnav" aria-label="Main navigation">
+        <a href="/docs/">Docs</a>
+        <a href="https://payai.sh">Website</a>
+        <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Documentation navigation">
+        <div class="nav-section">
+          <p>Start</p>
+          <a href="/docs/">Overview</a>
+          <a href="/docs/getting-started/">Getting Started</a>
+          <a href="/docs/protocol/">Protocol Notes</a>
+          <a href="/docs/architecture/">Architecture</a>
+          <a href="/docs/schemas/" aria-current="page">Schemas</a>
+          <a href="/docs/agent-integration/">Agent Integration</a>
+          <a href="/docs/publishing/">Publishing</a>
+        </div>
+        <div class="nav-section">
+          <p>Project</p>
+          <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/core">npm core</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/x402">npm x402</a>
+        </div>
+      </aside>
+      <main class="content">
+        <h1>Schemas</h1>
+        <p>The core package exports TypeScript interfaces for grants, quotes, decisions, receipts, and ledgers.</p>
+
+        <h2>Money</h2>
+        <pre><code>interface Money {
+  amount: string;
+  currency: string;
+}</code></pre>
+        <p>Amounts are decimal strings. The current implementation supports up to 6 decimal places.</p>
+
+        <h2>SpendingGrant</h2>
+        <pre><code>interface SpendingGrant {
+  id: string;
+  agentId: string;
+  totalBudget: Money;
+  perPaymentLimit?: Money;
+  allowedMerchants?: string[];
+  allowedPurposes?: string[];
+  expiresAt?: string;
+}</code></pre>
+
+        <h2>PaymentQuote</h2>
+        <pre><code>interface PaymentQuote {
+  merchant: string;
+  amount: Money;
+  purpose?: string;
+  resource?: string;
+  rail?: string;
+  network?: string;
+  expiresAt?: string;
+}</code></pre>
+
+        <h2>PaymentDecision</h2>
+        <pre><code>interface PaymentDecision {
+  allowed: boolean;
+  reason: string;
+  grantId: string;
+  quote: PaymentQuote;
+  spent: Money;
+  remaining: Money;
+}</code></pre>
+        <p>Denied reasons currently include <code>currency_mismatch</code>, <code>grant_expired</code>, <code>quote_expired</code>, <code>merchant_not_allowed</code>, <code>purpose_not_allowed</code>, <code>per_payment_limit_exceeded</code>, and <code>budget_exceeded</code>.</p>
+
+        <h2>PaymentReceipt</h2>
+        <pre><code>interface PaymentReceipt {
+  id: string;
+  grantId: string;
+  agentId: string;
+  merchant: string;
+  amount: Money;
+  purpose?: string;
+  rail?: string;
+  network?: string;
+  resource?: string;
+  transactionHash?: string;
+  createdAt: string;
+}</code></pre>
+      </main>
+    </div>
+  </body>
+</html>

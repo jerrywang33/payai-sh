@@ -14,6 +14,15 @@ PayAI answers: should this agent be allowed to pay?
 - `@payai-sh/core`: grants, policy checks, spending ledger, and receipts
 - `@payai-sh/x402`: x402-compatible fetch wrapper with PayAI policy enforcement
 
+## Status
+
+Current npm release:
+
+- `@payai-sh/core` v0.0.2
+- `@payai-sh/x402` v0.0.2
+
+The current implementation is a local policy and receipt layer. Production systems should connect the payer callback to a real x402 client or facilitator, use a persistent ledger, and add human approval workflows for high-risk payments.
+
 ## Install
 
 ```bash
@@ -88,7 +97,14 @@ PayAI is not:
 - Developer docs: https://payai.sh/docs/
 - [Getting started](docs/getting-started.md)
 - [Protocol notes](docs/protocol.md)
+- [Architecture](docs/architecture.md)
+- [Schemas](docs/schemas.md)
+- [Agent integration](docs/agent-integration.md)
 - [Publishing](docs/publishing.md)
+
+## Security
+
+PayAI is not a wallet and does not custody funds. The x402 payer callback is where a real integration should sign, facilitate, or reject a payment. See [SECURITY.md](SECURITY.md).
 
 ## License
 

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agent Integration | PayAI Docs</title>
+    <meta name="description" content="Integrate PayAI into an agent payment flow.">
+    <link rel="stylesheet" href="/docs/assets/docs.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/docs/">
+        <span class="brand-mark">⚡</span>
+        <span>PayAI docs</span>
+      </a>
+      <nav class="topnav" aria-label="Main navigation">
+        <a href="/docs/">Docs</a>
+        <a href="https://payai.sh">Website</a>
+        <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Documentation navigation">
+        <div class="nav-section">
+          <p>Start</p>
+          <a href="/docs/">Overview</a>
+          <a href="/docs/getting-started/">Getting Started</a>
+          <a href="/docs/protocol/">Protocol Notes</a>
+          <a href="/docs/architecture/">Architecture</a>
+          <a href="/docs/schemas/">Schemas</a>
+          <a href="/docs/agent-integration/" aria-current="page">Agent Integration</a>
+          <a href="/docs/publishing/">Publishing</a>
+        </div>
+        <div class="nav-section">
+          <p>Project</p>
+          <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/core">npm core</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/x402">npm x402</a>
+        </div>
+      </aside>
+      <main class="content">
+        <h1>Agent Integration</h1>
+        <p>Use <code>@payai-sh/x402</code> to wrap an agent's paid <code>fetch</code> calls.</p>
+        <pre><code>import { createPayAIFetch } from "@payai-sh/x402";
+
+const payaiFetch = createPayAIFetch({
+  grant,
+  payer: async (request) => {
+    return request.fetch(request.paymentHeaders);
+  },
+  onReceipt: async (receipt) => {
+    console.log("paid", receipt);
+  }
+});
+
+const response = await payaiFetch("https://data.example.com/report", {
+  purpose: "research"
+});</code></pre>
+
+        <h2>Recommended Caller Pattern</h2>
+        <ol>
+          <li>Give each agent a narrow grant.</li>
+          <li>Pass task purpose and resource metadata into <code>payaiFetch</code>.</li>
+          <li>Treat <code>PayAIPolicyError</code> as a stop or human-review branch.</li>
+          <li>Store receipts with the agent task id in your own system.</li>
+          <li>Keep real wallet signing inside the payer callback.</li>
+        </ol>
+
+        <h2>Error Handling</h2>
+        <pre><code>try {
+  const response = await payaiFetch(url, { purpose: "research" });
+  return await response.json();
+} catch (error) {
+  if (error instanceof Error && error.name === "PayAIPolicyError") {
+    return { status: "payment_denied", reason: error.message };
+  }
+
+  throw error;
+}</code></pre>
+
+        <h2>Production Notes</h2>
+        <p>The default <code>MemorySpendingLedger</code> is for local demos and tests. Production agents should pass a persistent <code>SpendingLedger</code> implementation so budget checks survive process restarts.</p>
+      </main>
+    </div>
+  </body>
+</html>

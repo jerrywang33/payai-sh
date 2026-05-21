@@ -1,6 +1,6 @@
 {
   "name": "payai-sh",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "private": true,
   "description": "The payment policy layer for AI agents, built on x402.",
   "type": "module",

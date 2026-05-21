@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Architecture | PayAI Docs</title>
+    <meta name="description" content="PayAI architecture and payment boundary.">
+    <link rel="stylesheet" href="/docs/assets/docs.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/docs/">
+        <span class="brand-mark">⚡</span>
+        <span>PayAI docs</span>
+      </a>
+      <nav class="topnav" aria-label="Main navigation">
+        <a href="/docs/">Docs</a>
+        <a href="https://payai.sh">Website</a>
+        <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Documentation navigation">
+        <div class="nav-section">
+          <p>Start</p>
+          <a href="/docs/">Overview</a>
+          <a href="/docs/getting-started/">Getting Started</a>
+          <a href="/docs/protocol/">Protocol Notes</a>
+          <a href="/docs/architecture/" aria-current="page">Architecture</a>
+          <a href="/docs/schemas/">Schemas</a>
+          <a href="/docs/agent-integration/">Agent Integration</a>
+          <a href="/docs/publishing/">Publishing</a>
+        </div>
+        <div class="nav-section">
+          <p>Project</p>
+          <a href="https://github.com/jerrywang33/payai-sh">GitHub</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/core">npm core</a>
+          <a href="https://www.npmjs.com/package/@payai-sh/x402">npm x402</a>
+        </div>
+      </aside>
+      <main class="content">
+        <h1>Architecture</h1>
+        <p>PayAI sits around x402 payment execution.</p>
+        <pre><code>Agent
+  -> paid HTTP request
+Resource server
+  -> 402 Payment Required
+PayAI
+  -> parse quote
+  -> evaluate grant
+  -> call x402 payer only if allowed
+x402
+  -> sign, facilitate, verify, or settle payment
+PayAI
+  -> record receipt</code></pre>
+
+        <h2>Components</h2>
+        <h3>Grant</h3>
+        <p>A grant defines what an agent is allowed to spend: budget, per-payment limit, merchants, purposes, and expiry.</p>
+        <h3>Quote</h3>
+        <p>A quote is the payment requirement returned by a paid resource. PayAI normalizes x402 response bodies and payment headers into a <code>PaymentQuote</code>.</p>
+        <h3>Decision</h3>
+        <p>A decision is created before payment. If denied, PayAI throws a <code>PayAIPolicyError</code> and does not call the payer.</p>
+        <h3>Payer</h3>
+        <p>The payer callback is the x402 execution boundary. It receives the quote and payment headers, then integrates with a wallet, facilitator, or x402 client.</p>
+        <h3>Receipt</h3>
+        <p>A receipt is recorded after the paid request succeeds. Receipts are meant for audit logs, task attribution, and spend tracking.</p>
+
+        <h2>Current Boundary</h2>
+        <p>The first implementation includes local policy evaluation, an in-memory ledger, an x402 fetch wrapper, and a demo payer. Production systems should provide persistent storage, real x402 execution, and approval workflows.</p>
+      </main>
+    </div>
+  </body>
+</html>
