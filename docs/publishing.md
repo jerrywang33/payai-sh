@@ -56,3 +56,16 @@ npm publish --access public
 ## Token
 
 Use an npm automation token with publish rights for the `@payai-sh` scope.
+
+## Website Deployment Notes
+
+The website is deployed through the Cloudflare Pages project `payai-sh`.
+
+Current custom domains:
+
+- `payai.sh`
+- `www.payai.sh`
+- `paybot.sh`
+- `www.paybot.sh`
+
+`paybot.sh` is a domain-level brand variant of the same codebase. It uses the same GitHub repository and npm package scope (`@payai-sh/*`). See [PayBot Domain Deployment Notes](releases/2026-05-23-paybot-domain.md) for the Cloudflare DNS, Worker, and verification details.
