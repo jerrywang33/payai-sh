@@ -65,10 +65,56 @@ a {
   color: var(--muted);
 }
 
+.topnav .topnav-icon {
+  align-items: center;
+  display: inline-flex;
+  height: 1.8rem;
+  justify-content: center;
+  width: 1.8rem;
+}
+
+.topnav-github svg {
+  display: block;
+  fill: currentColor;
+  height: 1.18rem;
+  opacity: 0.84;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+  width: 1.18rem;
+}
+
+.topnav-github:hover svg {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.topnav-x span {
+  align-items: center;
+  background: rgba(244, 244, 245, 0.82);
+  border-radius: 999px;
+  color: #0f1115;
+  display: inline-flex;
+  font-size: 0.72rem;
+  font-weight: 900;
+  height: 1.18rem;
+  justify-content: center;
+  line-height: 1;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+  width: 1.18rem;
+}
+
 .topnav a:hover,
 .sidebar a:hover,
 .sidebar a[aria-current="page"] {
   color: var(--text);
+}
+
+.topnav-x:hover span {
+  background: var(--text);
+  transform: translateY(-1px);
 }
 
 .sidebar a[aria-current="page"] {

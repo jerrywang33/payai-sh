@@ -118,7 +118,73 @@ main,
 .header-actions {
   align-items: center;
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
+}
+
+.header-nav-link,
+.header-icon-link {
+  align-items: center;
+  color: rgba(247, 243, 234, 0.76);
+  display: inline-flex;
+  font-size: 0.94rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  min-height: 2rem;
+  text-decoration: none;
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.header-nav-link:hover,
+.header-icon-link:hover {
+  color: var(--ink);
+}
+
+.header-icon-link {
+  border-radius: 999px;
+  height: 2rem;
+  padding: 0;
+  width: 2rem;
+}
+
+.header-github-link svg {
+  display: block;
+  fill: currentColor;
+  height: 1.28rem;
+  opacity: 0.84;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+  width: 1.28rem;
+}
+
+.header-github-link:hover svg {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.header-x-link span {
+  align-items: center;
+  background: rgba(247, 243, 234, 0.82);
+  border-radius: 999px;
+  color: #14120f;
+  display: inline-flex;
+  font-size: 0.76rem;
+  font-weight: 900;
+  height: 1.28rem;
+  justify-content: center;
+  line-height: 1;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+  width: 1.28rem;
+}
+
+.header-x-link:hover span {
+  background: var(--ink);
+  transform: translateY(-1px);
 }
 
 .header-link,
@@ -166,6 +232,8 @@ main,
   color: #14120f;
 }
 
+.header-nav-link:hover,
+.header-icon-link:hover,
 .header-link:hover,
 .button:hover,
 .final-actions a:hover {
@@ -631,6 +699,10 @@ dd {
     padding-inline: 0.8rem;
   }
 
+  .header-actions {
+    gap: 0.85rem;
+  }
+
   h1 {
     font-size: clamp(2.65rem, 13vw, 3.8rem);
   }
@@ -679,6 +751,10 @@ dd {
   }
 
   .header-link,
+  .header-nav-link,
+  .header-icon-link,
+  .header-github-link svg,
+  .header-x-link span,
   .button,
   .final-actions a {
     transition: none;
