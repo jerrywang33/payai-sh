@@ -36,6 +36,7 @@ function toPayBot(html) {
     .replaceAll("PAYAI", "PAYBOT")
     .replaceAll("PayAI", "PayBot")
     .replaceAll("payai", "paybot")
+    .replaceAll("github.com/jerrywang33/paybot", "github.com/jerrywang33/payai")
     .replaceAll("paybot-sh", "payai-sh")
     .replaceAll("PayBotFetch", "PayAIFetch")
     .replaceAll("paybotFetch", "payaiFetch");

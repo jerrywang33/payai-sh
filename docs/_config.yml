@@ -1,6 +1,6 @@
 title: PayAI Docs
 description: Payment policy layer for AI agents.
-baseurl: "/payai-sh"
+baseurl: "/payai"
 url: "https://jerrywang33.github.io"
 markdown: kramdown
 permalink: pretty

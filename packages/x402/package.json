@@ -6,11 +6,11 @@
   "homepage": "https://payai.sh",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jerrywang33/payai-sh.git",
+    "url": "git+https://github.com/jerrywang33/payai.git",
     "directory": "packages/x402"
   },
   "bugs": {
-    "url": "https://github.com/jerrywang33/payai-sh/issues"
+    "url": "https://github.com/jerrywang33/payai/issues"
   },
   "exports": {
     ".": {

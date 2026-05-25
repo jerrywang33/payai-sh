@@ -68,4 +68,4 @@ Current custom domains:
 - `paybot.sh`
 - `www.paybot.sh`
 
-`paybot.sh` is a domain-level brand variant of the same codebase. It uses the same GitHub repository and npm package scope (`@payai-sh/*`). See [PayBot Domain Deployment Notes](releases/2026-05-23-paybot-domain.md) for the Cloudflare DNS, Worker, and verification details.
+`paybot.sh` is a domain-level brand variant of the same codebase. It uses the same GitHub repository (`jerrywang33/payai`) and npm package scope (`@payai-sh/*`). See [PayBot Domain Deployment Notes](releases/2026-05-23-paybot-domain.md) for the Cloudflare DNS, Worker, and verification details.

@@ -8,7 +8,8 @@ This note records the current dual-domain website setup. It is not an npm packag
 
 - `payai.sh` and `www.payai.sh` continue to serve the PayAI website.
 - `paybot.sh` and `www.paybot.sh` now serve the same codebase with PayBot-facing brand text.
-- The npm package scope, GitHub repository, and SDK examples remain `@payai-sh/*`, `payai-sh`, `createPayAIFetch`, and `payaiFetch`.
+- The npm package scope and SDK examples remain `@payai-sh/*`, `createPayAIFetch`, and `payaiFetch`.
+- The GitHub repository is `jerrywang33/payai`.
 - The top-right website navigation was restyled to match the lighter `jup.sh` pattern: `Docs`, GitHub icon, and X icon.
 - X links point to `https://x.com/jerrydev90`.
 
@@ -37,6 +38,7 @@ For `paybot.sh` and `www.paybot.sh`, the Worker transforms text-like assets:
 
 Then it restores product identifiers that must stay tied to the real package and repository:
 
+- `github.com/jerrywang33/paybot` -> `github.com/jerrywang33/payai`
 - `paybot-sh` -> `payai-sh`
 - `PayBotFetch` -> `PayAIFetch`
 - `paybotFetch` -> `payaiFetch`

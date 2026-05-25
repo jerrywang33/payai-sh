@@ -23,7 +23,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jerrywang33/payai-sh.git"
+    "url": "git+https://github.com/jerrywang33/payai.git"
   },
   "devDependencies": {
     "typescript": "^5.8.3"
